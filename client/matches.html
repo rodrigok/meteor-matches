@@ -1,0 +1,128 @@
+<head>
+  <title>matches</title>
+</head>
+
+<body>
+	{{> login}}
+
+	{{> newMatch}}
+
+	{{> matches}}
+</body>
+
+<template name="login">
+	<div class="text-center" style="padding: 10px;">
+		<div>
+			{{> loginButtons}}
+		</div>
+		<div>
+			<input type="text" class="username" value="{{currentUser.name}}">
+		</div>
+	</div>
+</template>
+
+<template name="matches">
+	<div class="matches">
+		{{#if Matches}}
+			<h2>MATCHES</h2>
+			{{#each Matches}}
+				<div>
+					<div class="match">
+						<table>
+							<tr>
+								{{#with arrayify usersByTeam}}
+									{{#with getAt . 0}}
+										{{#with match=../.. team=.}}
+											{{#if canAddScore match}}
+												<td>
+													<a href="#" class="btn btn-info btn-small add-score">+</a>
+												</td>
+											{{/if}}
+										{{/with}}
+										{{#each placeHoldersForTeam ../.. value}}
+											<td>
+												<div class="avatar placeholder"></div>
+											</td>
+										{{/each}}
+										{{#each value}}
+											<td>
+												{{> avatar userId=. size='medium' shape='circle'}}
+											</td>
+										{{/each}}
+									{{/with}}
+									<td>
+										{{#with getAt . 0}}
+											{{#with getScore ../.. key}}
+												{{score}}
+												{{#if pending}}
+													<span class="text-success">+{{pending}}</span>
+												{{/if}}
+											{{/with}}
+										{{/with}}
+										X
+										{{#with getAt . 1}}
+											{{#with getScore ../.. key}}
+												{{score}}
+												{{#if pending}}
+													<span class="text-success">+{{pending}}</span>
+												{{/if}}
+											{{/with}}
+										{{/with}}
+									</td>
+									{{#with getAt . 1}}
+										{{#each value}}
+											<td>
+												{{> avatar userId=. size='medium' shape='circle'}}
+											</td>
+										{{/each}}
+										{{#each placeHoldersForTeam ../.. value}}
+											<td>
+												<div class="avatar placeholder"></div>
+											</td>
+										{{/each}}
+										{{#with match=../.. team=.}}
+											{{#if canAddScore match}}
+												<td>
+													<a href="#" class="btn btn-info btn-small add-score">+</a>
+												</td>
+											{{/if}}
+										{{/with}}
+									{{/with}}
+								{{/with}}
+							</tr>
+						</table>
+						{{#if needsApproval .}}
+							<a class="btn btn-sm btn-success approve" href="#">APPROVE</a> <a class="btn btn-sm btn-danger reject" href="#">REJECT</a>
+						{{/if}}
+					</div>
+				</div>
+			{{/each}}
+		{{else}}
+			No matches
+		{{/if}}
+	</div>
+</template>
+
+<template name="newMatch">
+	<div class="teams">
+		<div>
+			<div class="avatar-column team-1">
+				{{#each users}}
+					{{#with userInTeamClass 1}}
+						{{> avatar user=.. size='medium' shape='circle' class=.}}
+					{{/with}}
+				{{/each}}
+			</div>
+			<div class="avatar-column team-2">
+				{{#each users}}
+					{{#with userInTeamClass 2}}
+						{{> avatar user=.. size='medium' shape='circle' class=.}}
+					{{/with}}
+				{{/each}}
+			</div>
+		</div>
+		{{#if validTeam}}
+			<a href="#" class="btn btn-success">CREATE MATCH</a>
+		{{/if}}
+	</div>
+</template>

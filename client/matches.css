@@ -1,0 +1,87 @@
+/* CSS declarations go here */
+
+.teams {
+	margin: 0 auto;
+	text-align: center;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+
+.matches {
+	margin: 0 auto;
+	text-align: center;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	font-size: 20px;
+}
+
+.matches td {
+	padding: 0 5px;
+}
+
+.avatar-column {
+	border: 1px solid #EEE;
+	display: inline-block;
+	border-radius: 7px;
+	padding: 10px 15px;
+	background-color: #FAFAFA;
+	color: #AAA;
+	margin-bottom: 10px;
+}
+
+.match {
+	border: 1px solid #EEE;
+	display: inline-block;
+	border-radius: 7px;
+	padding: 10px 15px;
+	background-color: #FAFAFA;
+	color: #AAA;
+	margin-bottom: 10px;
+}
+
+.avatar {
+	display: inline-block;
+}
+
+.avatar.placeholder {
+	border: 1px solid #ddd;
+	border-radius: 100%;
+}
+
+.avatar-column > .avatar {
+	opacity: .2;
+	transition: all .2s ease-in-out;
+}
+
+.avatar-column > .avatar.in-team, .avatar-column > .avatar.not-in-team, .avatar-column > .avatar:hover {
+	opacity: 1;
+}
+
+.avatar-column > .avatar:after {
+	content: "";
+	text-align: center;
+	color: #fff;
+	font-size: 32px;
+	height: 100%;
+	width: 100%;
+	position: relative;
+	float: left;
+	z-index: 100;
+	opacity: .0;
+	background-color: #FFF;
+	border-radius: 100%;
+	transition: all .2s ease-in-out, border-width .2s ease-in-out .2s;
+	border: 0px solid rgba(0,0,0,.5);
+}
+
+.avatar-column .avatar.in-team:after {
+	background-color: #0F0;
+	opacity: .5;
+	border-width: 3px;
+}
+
+.avatar-column .avatar.not-in-team:after {
+	content: "x";
+	background-color: #FDD;
+	opacity: .9;
+}
