@@ -1,5 +1,8 @@
 Meteor.methods
 	approve: (matchId) ->
+		if not @userId?
+			return
+
 		ScoreRequests.update {match: matchId, needsApprovalFrom: this.userId}, {$pull: {needsApprovalFrom: this.userId}}
 		pipeline = []
 		pipeline.push
@@ -17,9 +20,15 @@ Meteor.methods
 			Matches.update {_id: matchId}, update
 
 	reject: (matchId) ->
+		if not @userId?
+			return
+
 		ScoreRequests.remove {match: matchId, needsApprovalFrom: this.userId}
 
 	updateUserName: (userName) ->
+		if not @userId?
+			return
+
 		Meteor.users.update this.userId, {$set: {'profile.name': userName}}
 
 	createMatch: (teams) ->

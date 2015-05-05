@@ -1,6 +1,12 @@
 Template.matches.helpers
 	Matches: ->
-		return Matches.find({}, {sort: {count: 1}})
+		query = {}
+		teams = Session.get('teams')
+		if Object.keys(teams).length > 0
+			query =
+				users: $all: Object.keys(teams)
+
+		return Matches.find(query, {sort: {count: 1}})
 	placeHoldersForTeam: (m, users) ->
 		length = m.biggestTeam - users.length
 		return [0...length]
