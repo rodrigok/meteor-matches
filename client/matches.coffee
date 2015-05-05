@@ -11,6 +11,8 @@ Template.matches.helpers
 		if request?
 			result.pending = request.score
 		return result
+	approvalPending: (m, userId) ->
+		return if ScoreRequests.findOne({match: m._id, 'needsApprovalFrom': userId})? then 'pending' else ' '
 	needsApproval: (m) ->
 		return ScoreRequests.findOne({match: m._id, 'needsApprovalFrom': Meteor.userId()})?
 	canAddScore: (m) ->

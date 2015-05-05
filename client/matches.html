@@ -23,7 +23,9 @@
 										{{/each}}
 										{{#each value}}
 											<td>
-												{{> avatar userId=. size='medium' shape='circle'}}
+												{{#with approvalPending ../../.. .}}
+													{{> avatar userId=.. size='medium' shape='circle' class=.}}
+												{{/with}}
 											</td>
 										{{/each}}
 									{{/with}}
@@ -49,7 +51,9 @@
 									{{#with getAt . 1}}
 										{{#each value}}
 											<td>
-												{{> avatar userId=. size='medium' shape='circle'}}
+												{{#with approvalPending ../../.. .}}
+													{{> avatar userId=.. size='medium' shape='circle' class=.}}
+												{{/with}}
 											</td>
 										{{/each}}
 										{{#each placeHoldersForTeam ../.. value}}

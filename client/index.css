@@ -85,3 +85,25 @@
 	background-color: #FDD;
 	opacity: .9;
 }
+
+.avatar.pending {
+	border: 2px solid orange;
+	border-radius: 100%;
+}
+
+.avatar.pending:after {
+	content: "";
+	text-align: center;
+	color: #fff;
+	font-size: 32px;
+	height: 100%;
+	width: 100%;
+	position: relative;
+	float: left;
+	z-index: 100;
+	opacity: .6;
+	background-color: orange;
+	border-radius: 100%;
+	transition: all .2s ease-in-out, border-width .2s ease-in-out .2s;
+	border: 0px solid rgba(0,0,0,.5);
+}
