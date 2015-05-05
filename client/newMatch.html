@@ -1,0 +1,23 @@
+<template name="newMatch">
+	<div class="teams">
+		<div>
+			<div class="avatar-column team-1">
+				{{#each users}}
+					{{#with userInTeamClass 1}}
+						{{> avatar user=.. size='medium' shape='circle' class=.}}
+					{{/with}}
+				{{/each}}
+			</div>
+			<div class="avatar-column team-2">
+				{{#each users}}
+					{{#with userInTeamClass 2}}
+						{{> avatar user=.. size='medium' shape='circle' class=.}}
+					{{/with}}
+				{{/each}}
+			</div>
+		</div>
+		{{#if validTeam}}
+			<a class="btn btn-success">CREATE MATCH</a>
+		{{/if}}
+	</div>
+</template>

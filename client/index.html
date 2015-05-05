@@ -1,0 +1,26 @@
+<head>
+  <title>matches</title>
+</head>
+
+<body>
+	{{> login}}
+
+	{{#if currentUser}}
+		{{> newMatch}}
+
+		{{> matches}}
+	{{/if}}
+</body>
+
+<template name="login">
+	<div class="text-center" style="padding: 10px;">
+		<div>
+			{{> loginButtons}}
+		</div>
+		{{#if currentUser}}
+			<div>
+				<input type="text" class="username" value="{{currentUser.name}}">
+			</div>
+		{{/if}}
+	</div>
+</template>

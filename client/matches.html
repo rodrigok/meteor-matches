@@ -1,26 +1,3 @@
-<head>
-  <title>matches</title>
-</head>
-
-<body>
-	{{> login}}
-
-	{{> newMatch}}
-
-	{{> matches}}
-</body>
-
-<template name="login">
-	<div class="text-center" style="padding: 10px;">
-		<div>
-			{{> loginButtons}}
-		</div>
-		<div>
-			<input type="text" class="username" value="{{currentUser.name}}">
-		</div>
-	</div>
-</template>
-
 <template name="matches">
 	<div class="matches">
 		{{#if Matches}}
@@ -35,7 +12,7 @@
 										{{#with match=../.. team=.}}
 											{{#if canAddScore match}}
 												<td>
-													<a href="#" class="btn btn-info btn-small add-score">+</a>
+													<a class="btn btn-info btn-small add-score">+</a>
 												</td>
 											{{/if}}
 										{{/with}}
@@ -83,7 +60,7 @@
 										{{#with match=../.. team=.}}
 											{{#if canAddScore match}}
 												<td>
-													<a href="#" class="btn btn-info btn-small add-score">+</a>
+													<a class="btn btn-info btn-small add-score">+</a>
 												</td>
 											{{/if}}
 										{{/with}}
@@ -99,30 +76,6 @@
 			{{/each}}
 		{{else}}
 			No matches
-		{{/if}}
-	</div>
-</template>
-
-<template name="newMatch">
-	<div class="teams">
-		<div>
-			<div class="avatar-column team-1">
-				{{#each users}}
-					{{#with userInTeamClass 1}}
-						{{> avatar user=.. size='medium' shape='circle' class=.}}
-					{{/with}}
-				{{/each}}
-			</div>
-			<div class="avatar-column team-2">
-				{{#each users}}
-					{{#with userInTeamClass 2}}
-						{{> avatar user=.. size='medium' shape='circle' class=.}}
-					{{/with}}
-				{{/each}}
-			</div>
-		</div>
-		{{#if validTeam}}
-			<a href="#" class="btn btn-success">CREATE MATCH</a>
 		{{/if}}
 	</div>
 </template>

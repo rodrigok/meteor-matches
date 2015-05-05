@@ -10,6 +10,5 @@ accounts-ui
 bengott:avatar
 coffeescript
 twbs:bootstrap
-insecure
 underscore
 meteorhacks:aggregate
