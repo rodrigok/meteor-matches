@@ -3,7 +3,7 @@ Meteor.methods
 		if not @userId?
 			return
 
-		ScoreRequests.update {match: matchId, needsApprovalFrom: this.userId}, {$pull: {needsApprovalFrom: this.userId}}
+		ScoreRequests.update {match: matchId, needsApprovalFrom: this.userId}, {$pull: {needsApprovalFrom: this.userId}}, { multi: true }
 		pipeline = []
 		pipeline.push
 			$match:
