@@ -13,19 +13,18 @@ Template.matches.helpers
 	getScore: (m, teamId) ->
 		result =
 			score: m.score[teamId]
-		request = ScoreRequests.findOne({match: m._id, team: teamId, 'needsApprovalFrom.0': {$exists: true}})
-		if request?
-			result.pending = request.score
+
+		pending = 0
+		ScoreRequests.find({match: m._id, team: teamId, 'needsApprovalFrom.0': {$exists: true}}).fetch().forEach (request) ->
+			pending += request.score
+		result.pending = pending if pending > 0
 		return result
 	approvalPending: (m, userId) ->
 		return if ScoreRequests.findOne({match: m._id, 'needsApprovalFrom': userId})? then 'pending' else ' '
 	needsApproval: (m) ->
 		return ScoreRequests.findOne({match: m._id, 'needsApprovalFrom': Meteor.userId()})?
 	canAddScore: (m) ->
-		if Meteor.userId() in m.users
-			return not ScoreRequests.findOne({match: m._id, 'needsApprovalFrom.0': {$exists: true}})?
-
-		return false
+		return Meteor.userId() in m.users
 
 Template.matches.events
 	'click a.add-score': (e) ->
